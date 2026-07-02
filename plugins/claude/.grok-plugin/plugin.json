@@ -1,0 +1,8 @@
+{
+  "name": "claude",
+  "version": "0.1.0",
+  "description": "Delegate and review code with the Claude Code CLI from Grok and other compatible host agents.",
+  "author": {
+    "name": "yanggf"
+  }
+}

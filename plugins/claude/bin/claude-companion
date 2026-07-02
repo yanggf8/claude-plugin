@@ -1,0 +1,35 @@
+#!/bin/sh
+# Platform-detecting launcher for the claude-companion Rust binary.
+#
+# Only Linux x86_64 ships a pre-built binary today. This launcher exists so
+# adding another platform later (macOS, Windows) only means dropping a binary
+# under bin/<platform>/ and adding one case here -- the .md commands, the
+# agent, and the skill docs always call this launcher path, never a
+# platform-specific one directly.
+
+set -eu
+
+script_dir=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+
+os=$(uname -s)
+arch=$(uname -m)
+
+case "$os-$arch" in
+  Linux-x86_64)
+    target="$script_dir/linux-x64/claude-companion"
+    ;;
+  *)
+    echo "claude-companion: no pre-built binary for $os-$arch." >&2
+    echo "Supported today: Linux-x86_64." >&2
+    echo "Build from source: cd \"$script_dir/../companion-rs\" && cargo build --release" >&2
+    echo "then run the resulting target/release/claude-companion binary directly." >&2
+    exit 1
+    ;;
+esac
+
+if [ ! -x "$target" ]; then
+  echo "claude-companion: expected binary not found or not executable at $target" >&2
+  exit 1
+fi
+
+exec "$target" "$@"

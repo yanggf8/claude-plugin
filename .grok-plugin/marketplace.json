@@ -1,0 +1,21 @@
+{
+  "name": "claude-plugin",
+  "owner": {
+    "name": "yanggf"
+  },
+  "metadata": {
+    "description": "Delegate coding and review tasks to the Claude Code CLI from Grok and other compatible host agents.",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "claude",
+      "description": "Use Claude Code from Grok to delegate coding, debugging, and review tasks.",
+      "version": "0.1.0",
+      "author": {
+        "name": "yanggf"
+      },
+      "source": "./plugins/claude"
+    }
+  ]
+}
