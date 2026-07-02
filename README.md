@@ -80,9 +80,26 @@ Then run `/claude:setup` from within Codex the same way.
 
 ## Validate
 
+Run from inside your local checkout of this repo:
+
 ```bash
-grok plugin validate /home/yanggf/b/claude-plugin/plugins/claude
-/home/yanggf/b/claude-plugin/plugins/claude/bin/claude-companion setup --json
+grok plugin validate ./plugins/claude
+./plugins/claude/bin/claude-companion setup --json
+```
+
+Codex doesn't have its own `codex plugin validate` command; validate the manifest with the
+scripted checker Codex's plugin-creator skill ships (path may differ per Codex install —
+look under `~/.codex/skills/.system/plugin-creator/scripts/validate_plugin.py`):
+
+```bash
+python3 ~/.codex/skills/.system/plugin-creator/scripts/validate_plugin.py ./plugins/claude
+```
+
+After installing into either host, confirm the binary itself runs from its actual installed
+location (the path `grok plugin list` / `codex plugin list` reports, not this repo's checkout):
+
+```bash
+<installed-plugin-path>/bin/claude-companion setup --json
 ```
 
 ## License

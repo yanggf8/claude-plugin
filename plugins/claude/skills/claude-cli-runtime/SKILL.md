@@ -16,7 +16,13 @@ Always invoke the companion — never call `claude` directly from the delegation
 "${GROK_PLUGIN_ROOT}/bin/claude-companion" <setup|task|review> [args]
 ```
 
-`${GROK_PLUGIN_ROOT}` is set by Grok for installed plugins. `${CLAUDE_PLUGIN_ROOT}` is the compatibility alias.
+`${GROK_PLUGIN_ROOT}` is set by Grok for installed plugins. `${CLAUDE_PLUGIN_ROOT}` is the
+compatibility alias. **Not every host sets either** — Codex, for example, does not inject a
+plugin-root env var into command/agent Bash calls, so both are empty there. When both are
+unset, locate this plugin's own installed `bin/claude-companion` yourself (from the
+installed-plugin path your host reports, e.g. via `grok plugin list` / `codex plugin list`,
+or from this skill/command file's own directory) and invoke that path directly instead of
+the `${...}`-templated form above.
 
 ## Default model
 

@@ -1,7 +1,7 @@
 ---
 description: Check whether the local Claude Code CLI is ready to delegate to
 argument-hint: '[--probe]'
-allowed-tools: Bash(${GROK_PLUGIN_ROOT}/bin/claude-companion:*), Bash(${CLAUDE_PLUGIN_ROOT}/bin/claude-companion:*)
+allowed-tools: Bash(${GROK_PLUGIN_ROOT}/bin/claude-companion:*), Bash(${CLAUDE_PLUGIN_ROOT}/bin/claude-companion:*), Bash(*/bin/claude-companion:*)
 ---
 
 Run:
@@ -11,6 +11,13 @@ Run:
 ```
 
 If `GROK_PLUGIN_ROOT` is unset, use `CLAUDE_PLUGIN_ROOT` instead.
+
+**Not every host sets either variable.** Codex, for example, does not inject a plugin-root
+env var into command Bash calls — both will be empty there. If both are unset or the above
+command fails to find the binary, locate this plugin's own installed `bin/claude-companion`
+yourself (e.g. from the installed-plugin path your host reports, or by finding this command
+file's own directory and walking up to its `bin/claude-companion` sibling) and run that path
+directly instead of relying on the template above.
 
 Then present the result to the user:
 

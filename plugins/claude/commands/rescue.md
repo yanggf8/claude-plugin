@@ -1,7 +1,7 @@
 ---
 description: Delegate a coding, debugging, or review task to the Claude Code CLI as a parallel worker
 argument-hint: '[--read] [--background] [--effort <level>] [--model <id>] <task description>'
-allowed-tools: Bash(${GROK_PLUGIN_ROOT}/bin/claude-companion:*), Bash(${CLAUDE_PLUGIN_ROOT}/bin/claude-companion:*)
+allowed-tools: Bash(${GROK_PLUGIN_ROOT}/bin/claude-companion:*), Bash(${CLAUDE_PLUGIN_ROOT}/bin/claude-companion:*), Bash(*/bin/claude-companion:*)
 ---
 
 Forward the user's request to Claude Code via the companion runtime. Treat this as a thin hand-off — do not solve the task yourself.
@@ -17,7 +17,11 @@ Forward the user's request to Claude Code via the companion runtime. Treat this 
 "${GROK_PLUGIN_ROOT}/bin/claude-companion" task <flags> "<task description>"
 ```
 
-Use `CLAUDE_PLUGIN_ROOT` if `GROK_PLUGIN_ROOT` is unset.
+Use `CLAUDE_PLUGIN_ROOT` if `GROK_PLUGIN_ROOT` is unset. Not every host sets either — Codex
+does not inject a plugin-root env var into command Bash calls, so both may be empty there.
+If so, locate this plugin's own installed `bin/claude-companion` yourself (from the
+installed-plugin path your host reports, or this command file's own directory) and run that
+path directly.
 
 4. Return the companion's stdout as-is. Do not add your own analysis before or after it.
 

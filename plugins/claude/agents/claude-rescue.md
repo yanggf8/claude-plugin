@@ -19,7 +19,9 @@ Forwarding rules:
 
 - Use exactly one `Bash` call to invoke:
   `"${GROK_PLUGIN_ROOT}/bin/claude-companion" task ...`
-  (If `GROK_PLUGIN_ROOT` is unset, use `CLAUDE_PLUGIN_ROOT`.)
+  (If `GROK_PLUGIN_ROOT` is unset, use `CLAUDE_PLUGIN_ROOT`. If both are unset — e.g. under
+  Codex, which does not inject a plugin-root env var into agent Bash calls — locate this
+  plugin's own installed `bin/claude-companion` yourself and run that path directly.)
 - If the user did not explicitly choose `--background` or foreground, prefer foreground for a small, clearly bounded request.
 - If the task looks complicated, open-ended, multi-step, or likely to run a long time, prefer `--background`.
 - Default to a write-capable Claude run unless the user explicitly asks for read-only behavior — in that case add `--read`.
