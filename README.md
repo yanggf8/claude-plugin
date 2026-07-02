@@ -1,8 +1,8 @@
 # claude-plugin
 
-A lightweight [Grok](https://x.ai/cli) plugin that delegates coding, debugging, and review tasks to the [Claude Code](https://claude.com/claude-code) CLI — the reverse of `grok-plugin-claude-code` / `codex-plugin-cc`.
+A lightweight plugin that delegates coding, debugging, and review tasks to the [Claude Code](https://claude.com/claude-code) CLI — the reverse of `grok-plugin-claude-code` / `codex-plugin-cc`.
 
-Works with any host that supports the Grok/Claude plugin component layout (Grok CLI today; Claude Code-compatible paths are included for portability).
+Installable into both **Grok** and **Codex** — the repo ships a manifest for each host's own plugin system (`.grok-plugin/` and `.agents/plugins/` + `.codex-plugin/`), pointing at the same shared `commands/`, `agents/`, `skills/`, and `bin/claude-companion` components.
 
 ## What you get
 
@@ -24,24 +24,31 @@ Works with any host that supports the Grok/Claude plugin component layout (Grok 
 
 ## Install
 
-### From a local checkout
+### Grok
 
 ```bash
-grok plugin install /home/yanggf/b/claude-plugin/plugins/claude --trust
+grok plugin marketplace add yanggf8/claude-plugin
+grok plugin install claude@yanggf8/claude-plugin --trust
 ```
 
-### From git (after publishing)
-
-```bash
-grok plugin marketplace add yanggf/claude-plugin
-grok plugin install claude@claude-plugin --trust
-```
+Or from a local checkout: `grok plugin install /path/to/claude-plugin/plugins/claude --trust`
 
 Then:
 
 ```
 /claude:setup
 ```
+
+### Codex
+
+```bash
+codex plugin marketplace add yanggf8/claude-plugin
+codex plugin add claude@claude-plugin
+```
+
+Or from a local checkout: `codex plugin marketplace add /path/to/claude-plugin`
+
+Then run `/claude:setup` from within Codex the same way.
 
 ## Usage
 

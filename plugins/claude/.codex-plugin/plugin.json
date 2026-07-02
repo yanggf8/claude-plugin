@@ -1,0 +1,27 @@
+{
+  "name": "claude",
+  "version": "0.1.0",
+  "description": "Delegate coding, debugging, and review tasks to the Claude Code CLI from Codex.",
+  "author": {
+    "name": "yanggf",
+    "url": "https://github.com/yanggf8"
+  },
+  "homepage": "https://github.com/yanggf8/claude-plugin",
+  "repository": "https://github.com/yanggf8/claude-plugin",
+  "license": "MIT",
+  "keywords": ["claude", "claude-code", "delegation", "code-review"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Claude",
+    "shortDescription": "Delegate coding work to Claude Code",
+    "longDescription": "Run Claude Code headlessly through a local Rust companion for coding, debugging, review, and rescue workflows delegated from Codex.",
+    "developerName": "yanggf",
+    "category": "Developer Tools",
+    "capabilities": ["Interactive", "Read", "Write"],
+    "defaultPrompt": [
+      "Ask Claude Code to review this repository.",
+      "Delegate this debugging task to Claude Code.",
+      "Use Claude Code for a second opinion."
+    ]
+  }
+}
